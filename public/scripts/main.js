@@ -15,6 +15,7 @@ let solarSys = {
 	ganymede: {},
 	saturn: {},
 	saturnRings: {},
+	titan: {},
 	uranus: {},
 	uranusRings: {},
 	neptune: {},
@@ -72,7 +73,7 @@ function init() {
   const light1 = new THREE.AmbientLight(0xffffff, .5)
   scene.add(light1)
 
-	let light	= new THREE.PointLight(0xffffff, 1, 0)
+	let light	= new THREE.PointLight(0xffffff, .5, 0)
 	light.position.set( 0, 0, 0 )
 	light.castShadow	= true
 	light.shadow.camera.near	= 0.5
@@ -155,6 +156,7 @@ function init() {
     depthWrite: false
   })
 
+	//JUPITER moons
 	// callisto radius 1,498mi, 1,170,000mi from Jupiter
 	let callistogeo = new THREE.SphereGeometry(9.62, 32, 32)
 	let callistomat = new THREE.MeshPhongMaterial({
@@ -184,6 +186,15 @@ function init() {
 	let iomat = new THREE.MeshPhongMaterial({
 		map: textureLoader.load('../assets/io.png'),
 		bumpMap: textureLoader.load('../assets/io.png'),
+		bumpScale: 6
+	})
+
+	//SATURN MOON
+	//Titan radius 1,600mi, 759,220 miles from Saturn,
+	let titangeo = new THREE.SphereGeometry(10.62, 32, 32)
+	let titanmat = new THREE.MeshPhongMaterial({
+		map: textureLoader.load('../assets/Titan.png'),
+		bumpMap: textureLoader.load('../assets/Titan.png'),
 		bumpScale: 6
 	})
 
@@ -247,23 +258,22 @@ function init() {
 	return material
 }
 
-
 	var geometry	= new THREE.SphereGeometry(900, 32, 32)
 	var material	= createAtmosphereMaterial()
-	material.uniforms.glowColor.value.set(0xf4a742)
+	material.uniforms.glowColor.value.set(0xefaf26)
 	material.uniforms.coeficient.value	= .8
 	material.uniforms.power.value		= 2.0
-	var mesh	= new THREE.Mesh(geometry, material )
+	var mesh	= new THREE.Mesh( geometry, material )
 	mesh.scale.multiplyScalar(1.01)
 	solarSys.sun.add( mesh )
 	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
 	var geometry	= new THREE.SphereGeometry(900, 32, 32)
 	var material	= createAtmosphereMaterial()
 	material.side	= THREE.BackSide
-	material.uniforms.glowColor.value.set(0xf4a742)
+	material.uniforms.glowColor.value.set(0xefaf26)
 	material.uniforms.coeficient.value	= 0.4
 	material.uniforms.power.value		= 8.2
-	var mesh	= new THREE.Mesh(geometry, material )
+	var mesh	= new THREE.Mesh( geometry, material )
 	mesh.scale.multiplyScalar(1.3)
 	solarSys.sun.add( mesh )
 	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
@@ -336,7 +346,7 @@ function init() {
 	//JUPITER's CALLISTO
 	solarSys.callisto = new THREE.Mesh(callistogeo, callistomat)
 	let callistoPivot = new THREE.Object3D()
-	solarSys.jupiter.add(callistoPivot)
+	jupiterGroup.add(callistoPivot)
 	callistoPivot.position.x = 370
 	callistoPivot.position.y = 0
 	callistoPivot.add(solarSys.callisto)
@@ -346,7 +356,7 @@ function init() {
 	//JUPITER's GANYMEDE
 	solarSys.ganymede = new THREE.Mesh(ganymedegeo, ganymedemat)
 	let ganymedePivot = new THREE.Object3D()
-	solarSys.jupiter.add(ganymedePivot)
+	jupiterGroup.add(ganymedePivot)
 	ganymedePivot.position.x = 450
 	ganymedePivot.position.y = 50
 	ganymedePivot.add(solarSys.ganymede)
@@ -356,7 +366,7 @@ function init() {
 	//JUPITER's IO
 	solarSys.io = new THREE.Mesh(iogeo, iomat)
 	let ioPivot = new THREE.Object3D()
-	solarSys.jupiter.add(ioPivot)
+	jupiterGroup.add(ioPivot)
 	ioPivot.position.x = 470
 	ioPivot.position.y = 100
 	ioPivot.add(solarSys.io)
@@ -366,7 +376,7 @@ function init() {
 	//JUPITER's EUROPA
 	solarSys.europa = new THREE.Mesh(europageo, europamat)
 	let europaPivot = new THREE.Object3D()
-	solarSys.jupiter.add(europaPivot)
+	jupiterGroup.add(europaPivot)
 	europaPivot.position.x = 470
 	europaPivot.position.z = 150
 	europaPivot.add(solarSys.europa)
@@ -387,6 +397,37 @@ function init() {
 	solarSys.saturnRings = THREEx.Planets.createSaturnRing()
 	saturnRingsPivot.add(solarSys.saturnRings)
 	saturnGroup.add(solarSys.saturnRings)
+
+	// Saturn moon TITAN
+	solarSys.titan = new THREE.Mesh(titangeo, titanmat)
+	let titanPivot = new THREE.Object3D()
+	saturnGroup.add(titanPivot)
+	titanPivot.position.x = 370
+	titanPivot.position.y = 0
+	titanPivot.add(solarSys.titan)
+	solarSys.titan.castShadow = true
+	solarSys.titan.receiveShadow = false
+
+	var geometry	= new THREE.SphereGeometry(11, 32, 32)
+	var material	= createAtmosphereMaterial()
+	material.uniforms.glowColor.value.set(0xea94f7)
+	material.uniforms.coeficient.value	= 0.8
+	material.uniforms.power.value		= 1.0
+	var mesh	= new THREE.Mesh( geometry, material )
+	mesh.scale.multiplyScalar(1.0)
+	solarSys.titan.add( mesh )
+	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
+	var geometry	= new THREE.SphereGeometry(11, 32, 32)
+	var material	= createAtmosphereMaterial()
+	material.side	= THREE.BackSide
+	material.uniforms.glowColor.value.set(0xea94f7)
+	material.uniforms.coeficient.value	= 0.3
+	material.uniforms.power.value		= 8.3
+	var mesh	= new THREE.Mesh( geometry, material )
+	mesh.scale.multiplyScalar(1.01)
+	solarSys.titan.add( mesh )
+	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
+
 
 	// Uranus
 	uranusPivot = new THREE.Object3D()
@@ -430,21 +471,31 @@ function init() {
 
 let solarSysControls =  new THREE.OrbitControls(camera, renderer.domElement)
 function onDocumentMouseDown(event) {
+
+	if (event.target !== renderer.domElement) {
+		return
+	}
   let vector = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5)
 	let raycaster = new THREE.Raycaster()
 	raycaster.setFromCamera(vector, camera)
 
-	let intersects = raycaster.intersectObjects([solarSys.sun, solarSys.mercury, solarSys.venus, solarSys.earth, solarSys.mars, solarSys.jupiter, solarSys.saturn, solarSys.uranus, solarSys.neptune, solarSys.pluto], true)
+	let intersects = raycaster.intersectObjects([solarSys.sun, solarSys.mercury, solarSys.venus, solarSys.earth, solarSys.mars, solarSys.jupiter, solarSys.saturn, solarSys.uranus, solarSys.neptune, solarSys.pluto, solarSys.callisto, solarSys.io, solarSys.europa, solarSys.ganymede, solarSys.titan], true)
 
 	if (intersects.length > 0) {
 
 		if (camera.parent) {
 			camera.parent.remove(camera)
 		}
-		// let position = camera.position
-		let xIndex = intersects[0].object.position.x
+
+		if (intersects[0].object.geometry.parameters.radius < 100) {
+			let zIndex = intersects[0].object.geometry.parameters.radius+((intersects[0].object.geometry.parameters.radius)*0.1)
+			let xIndex = intersects[0].object.position.x - ((intersects[0].object.geometry.parameters.radius)*1.5)
+			// let xIndex = -500
+			console.log(intersects[0].object.geometry.parameters.radius);
+		}
+		let xIndex = intersects[0].object.position.x - ((intersects[0].object.geometry.parameters.radius)*2)
 		let yIndex = intersects[0].object.position.y
-		let zIndex = intersects[0].object.geometry.parameters.radius+((intersects[0].object.geometry.parameters.radius)*0.7)
+		let zIndex = intersects[0].object.geometry.parameters.radius+((intersects[0].object.geometry.parameters.radius)*2)
 		camera.position.set(xIndex,yIndex,zIndex)
 		// camera.lookAt(intersects[0].object)
 		// let target = {x: xIndex, y: yIndex, z: zIndex}
@@ -486,7 +537,7 @@ function render() {
 	solarSys.europa.rotation.y -= 0.002
 	solarSys.io.rotation.y -= 0.001
 	solarSys.ganymede.rotation.y -= 0.01
-	sunGroup.rotation.y -= 0.002*(-1)
+	sunGroup.rotation.y -= 1/24.47*0.001*(-1)
 	// solarSys.starfield.rotation.y -= 0.0001
 	mercuryGroup.rotation.y -= 1/58*0.001*(-1)
 	mercuryPivot.rotation.y -=365/88*0.001*(-1)

@@ -3,13 +3,39 @@
   <head>
     <meta charset="utf-8">
     <title>Wanderers interactive</title>
+    <link rel="stylesheet" href="./assets/animate.css">
+    <link rel="stylesheet" href="./assets/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
   </head>
   <body>
     <canvas id="mainCanvas"></canvas>
+    <div class="planetInfo">
+      <h5 class="planetHeader">You are currently on planet Earth</h5>
+      <div class="divider"></div>
+      <h6 class="planetAge"></h6>
+      <h6 class="planetR"></h6>
+      <h6 class="planetMoons">Planet Moons: 1</h6>
+      <h6 class="planetOrbit">Orbit Period: 365 Earth Days</h6>
+      <h6 class="planetTemp">Surface temprature: -88 to 58C</h6>
+      <div class="divider"></div>
+      <ul class="planetFact">
+        <li><p>The Earth’s rotation is gradually slowing.
+          This deceleration is happening almost imperceptibly, at approximately 17 milliseconds per hundred years, although the rate at which it occurs is not perfectly uniform. This has the effect of lengthening our days, but it happens so slowly that it could be as much as 140 million years before the length of a day will have increased to 25 hours.</p></li>
+        <li><p>There is only one natural satellite of the planet Earth.
+          As a percentage of the size of the body it orbits, the Moon is the largest satellite of any planet in our solar system. In real terms, however, it is only the fifth largest natural satellite.</p></li>
+        <li><p>The Earth is the densest planet in the Solar System.
+          This varies according to the part of the planet; for example, the metallic core is denser than the crust. The average density of the Earth is approximately 5.52 grams per cubic centimetre.</p></li>
+      </ul>
+      <a class="waves-effect waves-light btn closeInfo">Close</a>
+    </div>
   </body>
   <script src="./scripts/three.min.js"></script>
   <script src="./scripts/bower_components/tween.js/src/Tween.js"></script>
+  <script src="./scripts/bower_components/threex.domevents/threex.domevents.js"></script>
   <script src="./scripts/bower_components/threex.planets/threex.planets.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <script src="./scripts/orbitControls.js"></script>
   <script src="./scripts/main.js"></script>
+  <script src="./scripts/infoCards.js"></script>
 </html>

@@ -23,7 +23,7 @@ THREEx.Planets.createMercury	= function(){
 	var material	= new THREE.MeshPhongMaterial({
 		map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/mercurymap.jpg'),
 		bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/mercurybump.jpg'),
-		bumpScale: 0.5,
+		bumpScale: 3,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
@@ -34,7 +34,7 @@ THREEx.Planets.createVenus	= function(){
 	var material	= new THREE.MeshPhongMaterial({
 		map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/venusmap.jpg'),
 		bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/venusbump.jpg'),
-		bumpScale: 0.5,
+		bumpScale: 3,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
@@ -117,7 +117,7 @@ THREEx.Planets.createMoon	= function(){
 	var material	= new THREE.MeshPhongMaterial({
 		map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/moonmap1k.jpg'),
 		bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/moonbump1k.jpg'),
-		bumpScale: 0.5,
+		bumpScale: .5,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
@@ -128,7 +128,7 @@ THREEx.Planets.createMars	= function(){
 	var material	= new THREE.MeshPhongMaterial({
 		map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/marsmap1k.jpg'),
 		bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/marsbump1k.jpg'),
-		bumpScale: 0.5,
+		bumpScale: 5,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
@@ -140,7 +140,7 @@ THREEx.Planets.createJupiter	= function(){
 	var material	= new THREE.MeshPhongMaterial({
 		map	: texture,
 		bumpMap	: texture,
-		bumpScale: 0.5,
+		bumpScale: 4,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
@@ -153,7 +153,7 @@ THREEx.Planets.createSaturn	= function(){
 	var material	= new THREE.MeshPhongMaterial({
 		map	: texture,
 		bumpMap	: texture,
-		bumpScale: 0.5,
+		bumpScale: 3,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
@@ -227,7 +227,7 @@ THREEx.Planets.createUranus	= function(){
 	var material	= new THREE.MeshPhongMaterial({
 		map	: texture,
 		bumpMap	: texture,
-		bumpScale: 0.5,
+		bumpScale: 1,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
@@ -300,7 +300,7 @@ THREEx.Planets.createNeptune	= function(){
 	var material	= new THREE.MeshPhongMaterial({
 		map	: texture,
 		bumpMap	: texture,
-		bumpScale: 0.05,
+		bumpScale: 3,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
@@ -311,9 +311,9 @@ THREEx.Planets.createNeptune	= function(){
 THREEx.Planets.createPluto	= function(){
 	var geometry	= new THREE.SphereGeometry(15, 32, 32)
 	var material	= new THREE.MeshPhongMaterial({
-		map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/plutomap1k.jpg'),
-		bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/plutobump1k.jpg'),
-		bumpScale: 0.05,
+		map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/wb_pluto.jpg'),
+		bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/wb_pluto.jpg'),
+		bumpScale: 0.5,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
