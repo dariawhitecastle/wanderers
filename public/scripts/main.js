@@ -200,64 +200,8 @@ function init() {
 
 	// sun
 	solarSys.sun = THREEx.Planets.createSun()
-	var createAtmosphereMaterial	= function(){
-	var vertexShader	= [
-		'varying vec3	vVertexWorldPosition;',
-		'varying vec3	vVertexNormal;',
 
-		'void main(){',
-		'	vVertexNormal	= normalize(normalMatrix * normal);',
-
-		'	vVertexWorldPosition	= (modelMatrix * vec4(position, 1.0)).xyz;',
-
-		'	// set gl_Position',
-		'	gl_Position	= projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
-		'}',
-
-		].join('\n')
-	var fragmentShader	= [
-		'uniform vec3	glowColor;',
-		'uniform float	coeficient;',
-		'uniform float	power;',
-
-		'varying vec3	vVertexNormal;',
-		'varying vec3	vVertexWorldPosition;',
-
-		'void main(){',
-		'	vec3 worldCameraToVertex= vVertexWorldPosition - cameraPosition;',
-		'	vec3 viewCameraToVertex	= (viewMatrix * vec4(worldCameraToVertex, 0.0)).xyz;',
-		'	viewCameraToVertex	= normalize(viewCameraToVertex);',
-		'	float intensity		= pow(coeficient + dot(vVertexNormal, viewCameraToVertex), power);',
-		'	gl_FragColor		= vec4(glowColor, intensity);',
-		'}',
-	].join('\n')
-
-	// create custom material from the shader code above
-	//   that is within specially labeled script tags
-	var material	= new THREE.ShaderMaterial({
-		uniforms: {
-			coeficient	: {
-				type	: "f",
-				value	: 1.0
-			},
-			power		: {
-				type	: "f",
-				value	: 2
-			},
-			glowColor	: {
-				type	: "c",
-				value	: new THREE.Color('pink')
-			},
-		},
-		vertexShader	: vertexShader,
-		fragmentShader	: fragmentShader,
-		//blending	: THREE.AdditiveBlending,
-		transparent	: true,
-		depthWrite	: false,
-	});
-	return material
-}
-
+	// add atmospheric glow
 	var geometry	= new THREE.SphereGeometry(900, 32, 32)
 	var material	= createAtmosphereMaterial()
 	material.uniforms.glowColor.value.set(0xefaf26)
@@ -313,6 +257,25 @@ function init() {
 	let cloudsPivot = new THREE.Object3D()
   solarSys.clouds = new THREE.Mesh(cloudsgeo, cloudsmat)
 	earthGroup.add(solarSys.clouds)
+
+	//add atmospheric glow
+	var geometry	= new THREE.SphereGeometry(25, 32, 32)
+	var material	= createAtmosphereMaterial()
+	material.uniforms.glowColor.value.set(0x83eff7)
+	material.uniforms.coeficient.value	= 0.8 // opacity
+	material.uniforms.power.value		= 1.8
+	var mesh	= new THREE.Mesh( geometry, material )
+	mesh.scale.multiplyScalar(1.01) //outer radius of glow
+	solarSys.earth.add( mesh )
+	var geometry	= new THREE.SphereGeometry(25, 32, 32)
+	var material	= createAtmosphereMaterial()
+	material.side	= THREE.BackSide
+	material.uniforms.glowColor.value.set(0x83eff7)
+	material.uniforms.coeficient.value	= 0.3 // opacity
+	material.uniforms.power.value		= 5
+	var mesh	= new THREE.Mesh( geometry, material )
+	mesh.scale.multiplyScalar(1.04) // outer radius of back glow
+	solarSys.earth.add( mesh )
 
 	// LUNA radius 1,079mi
 	solarSys.moon = THREEx.Planets.createMoon()
@@ -416,7 +379,6 @@ function init() {
 	var mesh	= new THREE.Mesh( geometry, material )
 	mesh.scale.multiplyScalar(1.0)
 	solarSys.titan.add( mesh )
-	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
 	var geometry	= new THREE.SphereGeometry(11, 32, 32)
 	var material	= createAtmosphereMaterial()
 	material.side	= THREE.BackSide
