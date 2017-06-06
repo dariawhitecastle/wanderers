@@ -24,7 +24,7 @@ let solarSys = {
 }
 
 let sunGroup, earthGroup, mercuryGroup, venusGroup, marsGroup, jupiterGroup, saturnGroup, uranusGroup, neptuneGroup, plutoGroup
-let earthPivot, mercuryPivot, venusPivot, marsPivot, jupiterPivot, saturnPivot, uranusPivot, neptunePivot, plutoPivot
+let earthPivot, moonPivot, mercuryPivot, venusPivot, marsPivot, jupiterPivot, saturnPivot, uranusPivot, neptunePivot, plutoPivot
 
 let renderer = new THREE.WebGLRenderer({canvas: document.getElementById('mainCanvas'), antialias: true})
 renderer.setSize( window.innerWidth, window.innerHeight )
@@ -98,7 +98,7 @@ function init() {
 	spotLight.target = spotTarget
 
 	scene.add(spotLight)
-	scene.add(new THREE.PointLightHelper(spotLight, 1))
+	// scene.add(new THREE.PointLightHelper(spotLight, 1))
 	//SpotLight back
 	let spotLight2 = new THREE.SpotLight( 0xffffff, 1, 0, 0.3, 0.2, 1 )
 	spotLight2.position.set(-2000, -2000, -2000)
@@ -139,7 +139,7 @@ function init() {
 	let textureLoader = new THREE.TextureLoader()
 
 	// earth
-  let earthgeo = new THREE.SphereGeometry( 25, 32, 32 )
+  let earthgeo = new THREE.SphereGeometry( 25, 40, 40 )
   let earthmat = new THREE.MeshPhongMaterial( {
     map: textureLoader.load('../assets/earth_atmos.jpg'),
     specularMap: textureLoader.load('../assets/specularmap.jpg'),
@@ -148,7 +148,7 @@ function init() {
   })
 
 	// clouds
-  let cloudsgeo = new THREE.SphereGeometry( 25.5, 32, 32 )
+  let cloudsgeo = new THREE.SphereGeometry( 25.5, 40, 40 )
   let cloudsmat = new THREE.MeshPhongMaterial( {
     map: textureLoader.load('../assets/earth_clouds_2048.png'),
     opacity: 0.8,
@@ -259,32 +259,33 @@ function init() {
 	earthGroup.add(solarSys.clouds)
 
 	//add atmospheric glow
-	var geometry	= new THREE.SphereGeometry(25, 32, 32)
+	var geometry	= new THREE.SphereGeometry(25, 40, 40)
 	var material	= createAtmosphereMaterial()
-	material.uniforms.glowColor.value.set(0x83eff7)
+	material.uniforms.glowColor.value.set(0x4fb4ef)
 	material.uniforms.coeficient.value	= 0.8 // opacity
-	material.uniforms.power.value		= 1.8
+	material.uniforms.power.value		= 1.3
 	var mesh	= new THREE.Mesh( geometry, material )
 	mesh.scale.multiplyScalar(1.01) //outer radius of glow
 	solarSys.earth.add( mesh )
-	var geometry	= new THREE.SphereGeometry(25, 32, 32)
+	var geometry	= new THREE.SphereGeometry(25, 40, 40)
 	var material	= createAtmosphereMaterial()
 	material.side	= THREE.BackSide
-	material.uniforms.glowColor.value.set(0x83eff7)
+	material.uniforms.glowColor.value.set(0x4fb4ef)
 	material.uniforms.coeficient.value	= 0.3 // opacity
-	material.uniforms.power.value		= 5
+	material.uniforms.power.value		= 5.2
 	var mesh	= new THREE.Mesh( geometry, material )
-	mesh.scale.multiplyScalar(1.04) // outer radius of back glow
+	mesh.scale.multiplyScalar(1.02) // outer radius of back glow
 	solarSys.earth.add( mesh )
 
 	// LUNA radius 1,079mi
 	solarSys.moon = THREEx.Planets.createMoon()
-	let moonPivot = new THREE.Object3D()
+	moonPivot = new THREE.Object3D()
 	solarSys.moon.castShadow = true
 	solarSys.moon.receiveShadow = true
 	solarSys.earth.add(moonPivot)
 	moonPivot.position.x = 50
 	moonPivot.add(solarSys.moon)
+	// earthGroup.add(moonPivot)
 
 	//MARS
 	marsPivot = new THREE.Object3D()
@@ -374,19 +375,19 @@ function init() {
 	var geometry	= new THREE.SphereGeometry(11, 32, 32)
 	var material	= createAtmosphereMaterial()
 	material.uniforms.glowColor.value.set(0xea94f7)
-	material.uniforms.coeficient.value	= 0.8
-	material.uniforms.power.value		= 1.0
+	material.uniforms.coeficient.value	= 0.3 // opacity
+	material.uniforms.power.value		= 2.5 // intensity
 	var mesh	= new THREE.Mesh( geometry, material )
-	mesh.scale.multiplyScalar(1.0)
+	mesh.scale.multiplyScalar(1.03) // outer r
 	solarSys.titan.add( mesh )
 	var geometry	= new THREE.SphereGeometry(11, 32, 32)
 	var material	= createAtmosphereMaterial()
 	material.side	= THREE.BackSide
 	material.uniforms.glowColor.value.set(0xea94f7)
-	material.uniforms.coeficient.value	= 0.3
-	material.uniforms.power.value		= 8.3
+	material.uniforms.coeficient.value	= 0.4 // opacity
+	material.uniforms.power.value		= 7.3 // intensity
 	var mesh	= new THREE.Mesh( geometry, material )
-	mesh.scale.multiplyScalar(1.01)
+	mesh.scale.multiplyScalar(1.05) // outer r
 	solarSys.titan.add( mesh )
 	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
 
@@ -413,7 +414,7 @@ function init() {
 	neptuneGroup.position.x = 4800
 	neptuneGroup.position.z = 2300
 	neptunePivot.add(neptuneGroup)
-	neptuneGroup.add(solarSys.neptue)
+	neptuneGroup.add(solarSys.neptune)
 
 	// Pluto
 	plutoPivot = new THREE.Object3D()
@@ -452,8 +453,6 @@ function onDocumentMouseDown(event) {
 		if (intersects[0].object.geometry.parameters.radius < 100) {
 			let zIndex = intersects[0].object.geometry.parameters.radius+((intersects[0].object.geometry.parameters.radius)*0.1)
 			let xIndex = intersects[0].object.position.x - ((intersects[0].object.geometry.parameters.radius)*1.5)
-			// let xIndex = -500
-			console.log(intersects[0].object.geometry.parameters.radius);
 		}
 		let xIndex = intersects[0].object.position.x - ((intersects[0].object.geometry.parameters.radius)*2)
 		let yIndex = intersects[0].object.position.y
@@ -494,6 +493,10 @@ function onWindowResize(event) {
 
 function render() {
 
+	// Groups rotate the planet's group on its axis
+	// Pivots rotate the planet's group around the sun
+	// Planet/Moon rotate the planet/moon on it's axis within the group
+
 	camera.lookAt( scene.position )
 	solarSys.callisto.rotation.y -= 0.007
 	solarSys.europa.rotation.y -= 0.002
@@ -501,6 +504,8 @@ function render() {
 	solarSys.ganymede.rotation.y -= 0.01
 	sunGroup.rotation.y -= 1/24.47*0.001*(-1)
 	// solarSys.starfield.rotation.y -= 0.0001
+	//moonPivot.rotation.y -= 1/29*0.001*(-1)
+	moonPivot.rotation.y = -2
 	mercuryGroup.rotation.y -= 1/58*0.001*(-1)
 	mercuryPivot.rotation.y -=365/88*0.001*(-1)
 	venusGroup.rotation.y -= 1/116*0.001

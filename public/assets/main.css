@@ -7,3 +7,52 @@
   color: white;
   opacity: 0;
 }
+.animated {
+  animation-duration: 3s;
+}
+
+.brackets li a::before,
+.brackets li a::after {
+  color: hsla(68, 94%, 73%, 1);
+	display: inline-block;
+	opacity: 0;
+	transition: transform 0.3s, opacity 0.2s;
+}
+.brackets li a::before {
+  color: hsla(68, 94%, 73%, 1);
+	margin-right: 10px;
+	content: '[';
+	transform: translateX(20px);
+}
+.brackets li a::after {
+  color: hsla(68, 94%, 73%, 1);
+	margin-left: 10px;
+	content: ']';
+	transform: translateX(-20px);
+}
+.brackets li a:hover::before,
+.brackets li a:hover::after,
+.brackets li a:focus::before,
+.brackets li a:focus::after {
+	opacity: 1;
+	-webkit-transform: translateX(0px);
+	-moz-transform: translateX(0px);
+	transform: translateX(0px);
+}
+
+footer.planetNav {
+  background-color: hsla(179, 100%, 50%, 0.4);
+  position: absolute;
+  bottom: 0px;
+}
+
+.navLinks {
+  padding: 5px, 0, 5px, 0;
+  min-width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}
+
+li:hover {
+  cursor: pointer;
+}
