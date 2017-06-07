@@ -24,7 +24,7 @@ let solarSys = {
 }
 
 let sunGroup, earthGroup, mercuryGroup, venusGroup, marsGroup, jupiterGroup, saturnGroup, uranusGroup, neptuneGroup, plutoGroup
-let earthPivot, moonPivot, mercuryPivot, venusPivot, marsPivot, jupiterPivot, saturnPivot, uranusPivot, neptunePivot, plutoPivot
+let earthPivot, moonPivot, mercuryPivot, venusPivot, marsPivot, jupiterPivot, callistoPivot, europaPivot, ioPivot, ganymedePivot, saturnPivot, uranusPivot, neptunePivot, plutoPivot
 
 let renderer = new THREE.WebGLRenderer({canvas: document.getElementById('mainCanvas'), antialias: true})
 renderer.setSize( window.innerWidth, window.innerHeight )
@@ -40,7 +40,7 @@ animate()
 function init() {
 	container = document.getElementById( 'mainCanvas' )
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000 )
-	camera.position.set( 0, 0, 5000 )
+	camera.position.set( 0, 0, 9000 )
 	scene = new THREE.Scene()
 	projector = new THREE.Projector()
 	document.addEventListener('mousedown', onDocumentMouseDown, false)
@@ -91,51 +91,57 @@ function init() {
 
 	//Spotlight for the sun params (color, intensity, distance, angle, penumbra, decay)
 	// Spotlight front
-	let spotLight = new THREE.SpotLight( 0xffffff, 1, 0, 0.3, 0.2, 1 )
-	spotLight.position.set(2000, 2000, 2000)
+	let spotLight = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2)
+	spotLight.position.set(5000, 5000, 5000)
 	let spotTarget = new THREE.Object3D()
 	spotTarget.position.set(0, 0, 0)
 	spotLight.target = spotTarget
 
 	scene.add(spotLight)
-	// scene.add(new THREE.PointLightHelper(spotLight, 1))
+	scene.add(new THREE.PointLightHelper(spotLight, 1))
 	//SpotLight back
-	let spotLight2 = new THREE.SpotLight( 0xffffff, 1, 0, 0.3, 0.2, 1 )
-	spotLight2.position.set(-2000, -2000, -2000)
+	let spotLight2 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2 )
+	spotLight2.position.set(-4000, -4000, -4000)
 	spotLight2.target = spotTarget
 
 	scene.add(spotLight2)
 	scene.add(new THREE.PointLightHelper(spotLight2, 1))
 	//SpotLight left-top
-	let spotLight3 = new THREE.SpotLight( 0xffffff, 1, 0, 0.3, 0.2, 1 )
-	spotLight3.position.set(-5000, 3000, 2000)
+	let spotLight3 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 1 )
+	spotLight3.position.set(-6000, 4000, 3000)
 	spotLight3.target = spotTarget
 
 	scene.add(spotLight3)
 	scene.add(new THREE.PointLightHelper(spotLight3, 1))
 	//SpotLight right-bottom
-	let spotLight4 = new THREE.SpotLight( 0xffffff, 1, 0, 0.3, 0.2, 1 )
-	spotLight4.position.set(2000, -2000, 2000)
+	let spotLight4 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2 )
+	spotLight4.position.set(4000, -4000, 4000)
 	spotLight4.target = spotTarget
 
 	scene.add(spotLight4)
 	scene.add(new THREE.PointLightHelper(spotLight4, 1))
 
 	//SpotLight right-top-
-	let spotLight5 = new THREE.SpotLight( 0xffffff, 1, 0, 0.3, 0.2, 1 )
-	spotLight5.position.set(2000, 2000, -2000)
+	let spotLight5 = new THREE.SpotLight( 0xffffff, 1, 0, 1.5, 5, 2 )
+	spotLight5.position.set(6000, 4000, -4000)
 	spotLight5.target = spotTarget
 
 	scene.add(spotLight5)
 	scene.add(new THREE.PointLightHelper(spotLight5, 1))
 	//SpotLight left-bottom-back
-	let spotLight6 = new THREE.SpotLight( 0xffffff, 1, 0, 0.3, 0.2, 1 )
-	spotLight6.position.set(-2000, -2000, 2000)
+	let spotLight6 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2 )
+	spotLight6.position.set(-6000, -4000, 4000)
 	spotLight6.target = spotTarget
 
 	scene.add(spotLight6)
 	scene.add(new THREE.PointLightHelper(spotLight6, 1))
 
+	let spotLight7 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2 )
+	spotLight7.position.set(-7000, 4000, -4000)
+	spotLight7.target = spotTarget
+
+	scene.add(spotLight7)
+	scene.add(new THREE.PointLightHelper(spotLight7, 1))
 	let textureLoader = new THREE.TextureLoader()
 
 	// earth
@@ -202,7 +208,7 @@ function init() {
 	solarSys.sun = THREEx.Planets.createSun()
 
 	// add atmospheric glow
-	var geometry	= new THREE.SphereGeometry(900, 32, 32)
+	var geometry	= new THREE.SphereGeometry(2500, 32, 32)
 	var material	= createAtmosphereMaterial()
 	material.uniforms.glowColor.value.set(0xefaf26)
 	material.uniforms.coeficient.value	= .8
@@ -211,7 +217,7 @@ function init() {
 	mesh.scale.multiplyScalar(1.01)
 	solarSys.sun.add( mesh )
 	// new THREEx.addAtmosphereMaterial2DatGui(material, datGUI)
-	var geometry	= new THREE.SphereGeometry(900, 32, 32)
+	var geometry	= new THREE.SphereGeometry(2500, 32, 32)
 	var material	= createAtmosphereMaterial()
 	material.side	= THREE.BackSide
 	material.uniforms.glowColor.value.set(0xefaf26)
@@ -230,7 +236,7 @@ function init() {
 	mercuryPivot = new THREE.Object3D()
 	scene.add(mercuryPivot)
   solarSys.mercury = THREEx.Planets.createMercury()
-	mercuryGroup.position.x = 1200
+	mercuryGroup.position.x = 4000
 	mercuryGroup.position.z = 600
 	mercuryGroup.add(solarSys.mercury)
 	mercuryPivot.add(mercuryGroup)
@@ -239,7 +245,7 @@ function init() {
 	venusPivot = new THREE.Object3D()
 	scene.add(venusPivot)
 	solarSys.venus = THREEx.Planets.createVenus()
-	venusGroup.position.x = 1450
+	venusGroup.position.x = 4700
 	venusGroup.position.z = 800
 	venusGroup.add(solarSys.venus)
 	venusPivot.add(venusGroup)
@@ -249,14 +255,14 @@ function init() {
 	scene.add(earthPivot)
 	solarSys.earth.receiveShadow = true
   solarSys.earth = new THREE.Mesh(earthgeo, earthmat)
-	earthGroup.position.x = 1750
+	earthGroup.position.x = 6000
 	earthGroup.position.z = 950
 	earthGroup.add(solarSys.earth)
 	earthPivot.add(earthGroup)
 
 	let cloudsPivot = new THREE.Object3D()
   solarSys.clouds = new THREE.Mesh(cloudsgeo, cloudsmat)
-	earthGroup.add(solarSys.clouds)
+	solarSys.earth.add(solarSys.clouds)
 
 	//add atmospheric glow
 	var geometry	= new THREE.SphereGeometry(25, 40, 40)
@@ -282,18 +288,18 @@ function init() {
 	moonPivot = new THREE.Object3D()
 	solarSys.moon.castShadow = true
 	solarSys.moon.receiveShadow = true
-	solarSys.earth.add(moonPivot)
-	moonPivot.position.x = 50
+	earthGroup.add(moonPivot)
+	solarSys.moon.position.x = 50
 	moonPivot.add(solarSys.moon)
 	// earthGroup.add(moonPivot)
 
-	//MARS
+	// MARS
 	marsPivot = new THREE.Object3D()
 	scene.add(marsPivot)
 	solarSys.mars = THREEx.Planets.createMars()
 	solarSys.mars.castShadow = true
 	solarSys.mars.receiveShadow = false
-	marsGroup.position.x = 1900
+	marsGroup.position.x = 6800
 	marsGroup.position.z = 1100
 	marsGroup.add(solarSys.mars)
 	marsPivot.add(marsGroup)
@@ -302,44 +308,44 @@ function init() {
 	jupiterPivot = new THREE.Object3D()
 	scene.add(jupiterPivot)
 	solarSys.jupiter = THREEx.Planets.createJupiter()
-	jupiterGroup.position.x = 2400
+	jupiterGroup.position.x = 7400
 	jupiterGroup.position.z = 1300
 	jupiterGroup.add(solarSys.jupiter)
 	jupiterPivot.add(jupiterGroup)
 
 	//JUPITER's CALLISTO
 	solarSys.callisto = new THREE.Mesh(callistogeo, callistomat)
-	let callistoPivot = new THREE.Object3D()
+	callistoPivot = new THREE.Object3D()
 	jupiterGroup.add(callistoPivot)
-	callistoPivot.position.x = 370
-	callistoPivot.position.y = 0
+	solarSys.callisto.position.x = 370
+	solarSys.callisto.position.y = 0
 	callistoPivot.add(solarSys.callisto)
 	solarSys.callisto.castShadow = true
 	solarSys.callisto.receiveShadow = false
 
 	//JUPITER's GANYMEDE
 	solarSys.ganymede = new THREE.Mesh(ganymedegeo, ganymedemat)
-	let ganymedePivot = new THREE.Object3D()
+	ganymedePivot = new THREE.Object3D()
 	jupiterGroup.add(ganymedePivot)
-	ganymedePivot.position.x = 450
-	ganymedePivot.position.y = 50
+	solarSys.ganymede.position.x = 450
+	solarSys.ganymede.position.y = 50
 	ganymedePivot.add(solarSys.ganymede)
 	solarSys.ganymede.castShadow = true
 	solarSys.ganymede.receiveShadow = false
 
 	//JUPITER's IO
 	solarSys.io = new THREE.Mesh(iogeo, iomat)
-	let ioPivot = new THREE.Object3D()
+	ioPivot = new THREE.Object3D()
 	jupiterGroup.add(ioPivot)
-	ioPivot.position.x = 470
-	ioPivot.position.y = 100
+	solarSys.io.position.x = 470
+	solarSys.io.position.y = 100
 	ioPivot.add(solarSys.io)
 	solarSys.io.castShadow = true
 	solarSys.io.receiveShadow = false
 
 	//JUPITER's EUROPA
 	solarSys.europa = new THREE.Mesh(europageo, europamat)
-	let europaPivot = new THREE.Object3D()
+	europaPivot = new THREE.Object3D()
 	jupiterGroup.add(europaPivot)
 	europaPivot.position.x = 470
 	europaPivot.position.z = 150
@@ -351,7 +357,7 @@ function init() {
 	saturnPivot = new THREE.Object3D()
 	scene.add(saturnPivot)
 	solarSys.saturn = THREEx.Planets.createSaturn()
-	saturnGroup.position.x = 3500
+	saturnGroup.position.x = 8200
 	saturnGroup.position.z = 1700
 	saturnPivot.add(saturnGroup)
 	saturnGroup.add(solarSys.saturn)
@@ -396,7 +402,7 @@ function init() {
 	uranusPivot = new THREE.Object3D()
 	scene.add(uranusPivot)
 	solarSys.uranus = THREEx.Planets.createUranus()
-	uranusGroup.position.x = 4200
+	uranusGroup.position.x = 9000
 	uranusGroup.position.z = 2000
 	uranusPivot.add(uranusGroup)
 	uranusGroup.add(solarSys.uranus)
@@ -411,7 +417,7 @@ function init() {
 	neptunePivot = new THREE.Object3D()
 	scene.add(neptunePivot)
 	solarSys.neptune = THREEx.Planets.createNeptune()
-	neptuneGroup.position.x = 4800
+	neptuneGroup.position.x = 9700
 	neptuneGroup.position.z = 2300
 	neptunePivot.add(neptuneGroup)
 	neptuneGroup.add(solarSys.neptune)
@@ -420,7 +426,7 @@ function init() {
 	plutoPivot = new THREE.Object3D()
 	scene.add(plutoPivot)
 	solarSys.pluto = THREEx.Planets.createPluto()
-	plutoGroup.position.x = 5000
+	plutoGroup.position.x = 11000
 	plutoGroup.position.z = 2600
 	plutoPivot.add(plutoGroup)
 	plutoGroup.add(solarSys.pluto)
@@ -498,19 +504,18 @@ function render() {
 	// Planet/Moon rotate the planet/moon on it's axis within the group
 
 	camera.lookAt( scene.position )
-	solarSys.callisto.rotation.y -= 0.007
-	solarSys.europa.rotation.y -= 0.002
-	solarSys.io.rotation.y -= 0.001
-	solarSys.ganymede.rotation.y -= 0.01
+	callistoPivot.rotation.y -= 1/7*0.001*(-1)
+	europaPivot.rotation.y -= 1/3.5*0.001*(-1)
+	ioPivot.rotation.y -= 1/1.77*0.001*(-1)
+	ganymedePivot.rotation.y -= 1/7*0.001*(-1)
 	sunGroup.rotation.y -= 1/24.47*0.001*(-1)
 	// solarSys.starfield.rotation.y -= 0.0001
-	//moonPivot.rotation.y -= 1/29*0.001*(-1)
-	moonPivot.rotation.y = -2
+	moonPivot.rotation.y -= 1/29*0.001*(-1)
 	mercuryGroup.rotation.y -= 1/58*0.001*(-1)
 	mercuryPivot.rotation.y -=365/88*0.001*(-1)
 	venusGroup.rotation.y -= 1/116*0.001
 	venusPivot.rotation.y -= 365/225*0.001*(-1)
-	earthGroup.rotation.y -= 0.001*(-1)
+	solarSys.earth.rotation.y -= 0.001*(-1)
 	earthPivot.rotation.y -= 0.001*(-1)
 	marsGroup.rotation.y -= 0.001*(-1)
 	marsPivot.rotation.y -= 365/687*0.001*(-1)

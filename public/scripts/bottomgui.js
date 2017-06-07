@@ -1,9 +1,3 @@
-// var domEvents	= new THREEx.DomEvents(camera, renderer.domElement)
-
-// $('.sun').click(() => {
-//   console.log('Hello')
-//   camera.position.set(0, 3000, 0)
-// })
 $('.solarSys').click(() => {
   camera.position.set( 0, 0, 5000 )
   scene.add(camera)

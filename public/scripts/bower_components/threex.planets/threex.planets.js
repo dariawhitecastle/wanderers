@@ -7,7 +7,7 @@ THREEx.Planets.baseURL	= '/scripts/bower_components/threex.planets/'
 // from http://planetpixelemporium.com/
 
 THREEx.Planets.createSun	= function(){
-	var geometry	= new THREE.SphereGeometry(900, 50, 50)
+	var geometry	= new THREE.SphereGeometry(2500, 50, 50)
 	var texture	= THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/Sun_texture.jpg')
 	var material	= new THREE.MeshPhongMaterial({
 		map	: texture,
@@ -325,7 +325,7 @@ THREEx.Planets.createStarfield	= function(){
 		map	: texture,
 		side	: THREE.BackSide
 	})
-	var geometry	= new THREE.SphereGeometry(8000, 32, 32)
+	var geometry	= new THREE.SphereGeometry(20000, 32, 32)
 	var mesh	= new THREE.Mesh(geometry, material)
 	return mesh
 }
