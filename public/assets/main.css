@@ -6,9 +6,11 @@
   position: absolute;
   color: white;
   opacity: 0;
+  pointer-events: none;
 }
 .animated {
   animation-duration: 3s;
+  pointer-events: all;
 }
 
 .brackets li a::before,

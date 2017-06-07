@@ -73,75 +73,44 @@ function init() {
   const light1 = new THREE.AmbientLight(0xffffff, .5)
   scene.add(light1)
 
-	let light	= new THREE.PointLight(0xffffff, .5, 0)
-	light.position.set( 0, 0, 0 )
-	light.castShadow	= true
-	light.shadow.camera.near	= 0.5
-	light.shadow.camera.far	= 500
-	light.shadow.camera.fov	= 90
-	light.shadow.camera.left	= -1
-	light.shadow.camera.right	=  1
-	light.shadow.camera.top	=  1
-	light.shadow.camera.bottom= -1
-	// light.shadowCameraVisible	= true
-	light.shadow.bias	= 0.01
-	light.shadow.mapSize.width	= 1024
-	light.shadow.mapSize.height	= 1024
-	scene.add( light )
+	// let light	= new THREE.PointLight(0xffffff, 0.5, 0)
+	// light.position.set( 0, 0, 0 )
+	// light.castShadow	= true
+	// light.shadow.camera.near	= 0.5
+	// light.shadow.camera.far	= 500
+	// light.shadow.camera.fov	= 90
+	// light.shadow.camera.left	= -1
+	// light.shadow.camera.right	=  1
+	// light.shadow.camera.top	=  1
+	// light.shadow.camera.bottom= -1
+	// // light.shadowCameraVisible	= true
+	// light.shadow.bias	= 0.01
+	// light.shadow.mapSize.width	= 1024
+	// light.shadow.mapSize.height	= 1024
+	// scene.add( light )
 
-	//Spotlight for the sun params (color, intensity, distance, angle, penumbra, decay)
-	// Spotlight front
-	let spotLight = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2)
-	spotLight.position.set(5000, 5000, 5000)
 	let spotTarget = new THREE.Object3D()
 	spotTarget.position.set(0, 0, 0)
-	spotLight.target = spotTarget
+	//Spotlight for the sun params (color, intensity, distance, angle, penumbra, decay)
+	// Spotlight front
+	function newSpotLight(x, y, z) {
 
-	scene.add(spotLight)
-	scene.add(new THREE.PointLightHelper(spotLight, 1))
-	//SpotLight back
-	let spotLight2 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2 )
-	spotLight2.position.set(-4000, -4000, -4000)
-	spotLight2.target = spotTarget
+		let spotLight = new THREE.SpotLight( 0xffffff, 1, 0, 0.5, 2, 2 )
+		spotLight.position.set(x, y, z)
+		spotLight.target = spotTarget
+		scene.add(spotLight)
+		scene.add(new THREE.SpotLightHelper(spotLight))
+	}
 
-	scene.add(spotLight2)
-	scene.add(new THREE.PointLightHelper(spotLight2, 1))
-	//SpotLight left-top
-	let spotLight3 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 1 )
-	spotLight3.position.set(-6000, 4000, 3000)
-	spotLight3.target = spotTarget
+	newSpotLight(3000, 3000, -3000)
+	newSpotLight(3000, 3000, 3000)
+	newSpotLight(3000, -3000, -3000)
+	newSpotLight(3000, -3000, 3000)
+	newSpotLight(-3000, 3000, -3000)
+	newSpotLight(-3000, 3000, 3000)
+	newSpotLight(-3000, -3000, -3000)
+	newSpotLight(-3000, -3000, 3000)
 
-	scene.add(spotLight3)
-	scene.add(new THREE.PointLightHelper(spotLight3, 1))
-	//SpotLight right-bottom
-	let spotLight4 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2 )
-	spotLight4.position.set(4000, -4000, 4000)
-	spotLight4.target = spotTarget
-
-	scene.add(spotLight4)
-	scene.add(new THREE.PointLightHelper(spotLight4, 1))
-
-	//SpotLight right-top-
-	let spotLight5 = new THREE.SpotLight( 0xffffff, 1, 0, 1.5, 5, 2 )
-	spotLight5.position.set(6000, 4000, -4000)
-	spotLight5.target = spotTarget
-
-	scene.add(spotLight5)
-	scene.add(new THREE.PointLightHelper(spotLight5, 1))
-	//SpotLight left-bottom-back
-	let spotLight6 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2 )
-	spotLight6.position.set(-6000, -4000, 4000)
-	spotLight6.target = spotTarget
-
-	scene.add(spotLight6)
-	scene.add(new THREE.PointLightHelper(spotLight6, 1))
-
-	let spotLight7 = new THREE.SpotLight( 0xffffff, 1, 0, 2, 5, 2 )
-	spotLight7.position.set(-7000, 4000, -4000)
-	spotLight7.target = spotTarget
-
-	scene.add(spotLight7)
-	scene.add(new THREE.PointLightHelper(spotLight7, 1))
 	let textureLoader = new THREE.TextureLoader()
 
 	// earth
@@ -463,9 +432,14 @@ function onDocumentMouseDown(event) {
 		let xIndex = intersects[0].object.position.x - ((intersects[0].object.geometry.parameters.radius)*2)
 		let yIndex = intersects[0].object.position.y
 		let zIndex = intersects[0].object.geometry.parameters.radius+((intersects[0].object.geometry.parameters.radius)*2)
-		camera.position.set(xIndex,yIndex,zIndex)
+		// camera.position.set(xIndex,yIndex,zIndex)
+		var objectPos = intersects[0].object.getWorldPosition()
+		var cameraPos = camera.getWorldPosition()
+		var newVector = new THREE.Vector3()
+		newVector.subVectors(objectPos, cameraPos)
+
 		// camera.lookAt(intersects[0].object)
-		// let target = {x: xIndex, y: yIndex, z: zIndex}
+		// let target = intersects[0].object.getWorldPosition()
 		// let tween = new TWEEN.Tween(position)
 		// .to(target, 2000)
 		// .easing(TWEEN.Easing.Linear.None)
@@ -478,8 +452,10 @@ function onDocumentMouseDown(event) {
     // camera.position.set(target)
 		// })
 		// .start()
+		intersects[0].object.add(camera)
+		camera.position = newVector
+		console.log(camera.position)
 
-		intersects[0].object.parent.add(camera)
 		solarSysControls.minDistance = intersects[0].object.geometry.parameters.radius+50
   }
 }
