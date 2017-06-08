@@ -342,7 +342,7 @@ function init() {
 	solarSys.titan = new THREE.Mesh(titangeo, titanmat)
 	titanPivot = new THREE.Object3D()
 	saturnGroup.add(titanPivot)
-	solarSys.titan.position.x = 450
+	solarSys.titan.position.x = -450
 	solarSys.titan.position.z = 400
 	titanPivot.add(solarSys.titan)
 	solarSys.titan.castShadow = true
@@ -350,7 +350,7 @@ function init() {
 
 	var geometry	= new THREE.SphereGeometry(11, 32, 32)
 	var material	= createAtmosphereMaterial()
-	material.uniforms.glowColor.value.set(0x47ed9f)
+	material.uniforms.glowColor.value.set(0x6ded8a)
 	material.uniforms.coeficient.value	= 0.3 // opacity
 	material.uniforms.power.value		= 2.5 // intensity
 	var mesh	= new THREE.Mesh( geometry, material )
@@ -359,7 +359,7 @@ function init() {
 	var geometry	= new THREE.SphereGeometry(11, 32, 32)
 	var material	= createAtmosphereMaterial()
 	material.side	= THREE.BackSide
-	material.uniforms.glowColor.value.set(0x22d6b2)
+	material.uniforms.glowColor.value.set(0x47ed9f)
 	material.uniforms.coeficient.value	= 0.1 // opacity
 	material.uniforms.power.value		= 7.3 // intensity
 	var mesh	= new THREE.Mesh( geometry, material )
