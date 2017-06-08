@@ -70,24 +70,24 @@ function init() {
 
 
 	//LIGHTS
-  const light1 = new THREE.AmbientLight(0xffffff, .5)
+  const light1 = new THREE.AmbientLight(0xffffff, .8)
   scene.add(light1)
 
-	// let light	= new THREE.PointLight(0xffffff, 0.5, 0)
-	// light.position.set( 0, 0, 0 )
-	// light.castShadow	= true
-	// light.shadow.camera.near	= 0.5
-	// light.shadow.camera.far	= 500
-	// light.shadow.camera.fov	= 90
-	// light.shadow.camera.left	= -1
-	// light.shadow.camera.right	=  1
-	// light.shadow.camera.top	=  1
-	// light.shadow.camera.bottom= -1
-	// // light.shadowCameraVisible	= true
-	// light.shadow.bias	= 0.01
-	// light.shadow.mapSize.width	= 1024
-	// light.shadow.mapSize.height	= 1024
-	// scene.add( light )
+	let light	= new THREE.PointLight(0xffffff, 0.7, 0)
+	light.position.set( 0, 0, 0 )
+	light.castShadow	= true
+	light.shadow.camera.near	= 0.5
+	light.shadow.camera.far	= 500
+	light.shadow.camera.fov	= 90
+	light.shadow.camera.left	= -1
+	light.shadow.camera.right	=  1
+	light.shadow.camera.top	=  1
+	light.shadow.camera.bottom= -1
+	// light.shadowCameraVisible	= true
+	light.shadow.bias	= 0.01
+	light.shadow.mapSize.width	= 1024
+	light.shadow.mapSize.height	= 1024
+	scene.add( light )
 
 	let spotTarget = new THREE.Object3D()
 	spotTarget.position.set(0, 0, 0)
@@ -95,21 +95,21 @@ function init() {
 	// Spotlight front
 	function newSpotLight(x, y, z) {
 
-		let spotLight = new THREE.SpotLight( 0xffffff, 1, 0, 0.5, 2, 2 )
+		let spotLight = new THREE.SpotLight( 0xffffff, 1.5, 7000, 1, 0, 1 )
 		spotLight.position.set(x, y, z)
 		spotLight.target = spotTarget
 		scene.add(spotLight)
-		scene.add(new THREE.SpotLightHelper(spotLight))
+		// scene.add(new THREE.SpotLightHelper(spotLight))
 	}
 
-	newSpotLight(3000, 3000, -3000)
-	newSpotLight(3000, 3000, 3000)
-	newSpotLight(3000, -3000, -3000)
-	newSpotLight(3000, -3000, 3000)
-	newSpotLight(-3000, 3000, -3000)
-	newSpotLight(-3000, 3000, 3000)
-	newSpotLight(-3000, -3000, -3000)
-	newSpotLight(-3000, -3000, 3000)
+	newSpotLight(2500, 2500, -2500)
+	newSpotLight(2500, 2500, 2500)
+	newSpotLight(2500, -2500, -2500)
+	newSpotLight(2300, -2300, 3000)
+	newSpotLight(-2500, 2500, -2500)
+	newSpotLight(-2500, 2500, 2500)
+	newSpotLight(-2500, -2500, -2500)
+	newSpotLight(-2500, -2500, 2200)
 
 	let textureLoader = new THREE.TextureLoader()
 
@@ -330,6 +330,7 @@ function init() {
 	saturnGroup.position.z = 1700
 	saturnPivot.add(saturnGroup)
 	saturnGroup.add(solarSys.saturn)
+
 
 	let saturnRingsPivot = new THREE.Object3D()
 	saturnPivot.add(saturnRingsPivot)
