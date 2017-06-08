@@ -4,6 +4,7 @@ $('.solarSys').click(() => {
 })
 
 $('.sun').click(() => {
+  // $('.planetInfo').addClass('.animated fadeOutLeft')
   var xIndex = sunGroup.position.x/15
   var zIndex = solarSys.sun.geometry.parameters.radius * (-3)
   camera.position.set(xIndex, 0, zIndex)

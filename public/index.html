@@ -6,10 +6,18 @@
     <link rel="stylesheet" href="./assets/animate.css">
     <link rel="stylesheet" href="./assets/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Arbutus+Slab|Cantata+One|Cinzel|Libre+Baskerville|Rozha+One" rel="stylesheet">
   </head>
   <body>
     <main>
       <canvas id="mainCanvas"></canvas>
+        <div class="landing animated fadeIn">
+          <h1>Wanderers</h1>
+          <div class="divider"></div>
+          <h4>Three.js experiment by Daria Calwell</h4>
+          <h5>Use bottom navigation to hop around the Solar System. Click on each planet to learn interesting facts. Click and drag around to change view point</h5>
+          <button class="waves-effect waves-light btn closeLanding">Start</button>
+        </div>
       <div class="planetInfo">
         <h5 class="planetHeader">You are currently on planet Earth</h5>
         <div class="divider"></div>
@@ -57,4 +65,5 @@
   <script src="./scripts/main.js"></script>
   <script src="./scripts/bottomgui.js"></script>
   <script src="./scripts/infoCards.js"></script>
+  <script src="./scripts/landing.js"></script>
 </html>

@@ -40,7 +40,7 @@ animate()
 function init() {
 	container = document.getElementById( 'mainCanvas' )
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000 )
-	camera.position.set( 0, 0, 9000 )
+	camera.position.set( 0, 0, 13000 )
 	scene = new THREE.Scene()
 	projector = new THREE.Projector()
 	document.addEventListener('mousedown', onDocumentMouseDown, false)
