@@ -312,7 +312,7 @@ THREEx.Planets.createPluto	= function(){
 	var geometry	= new THREE.SphereGeometry(15, 32, 32)
 	var material	= new THREE.MeshPhongMaterial({
 		map	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/wb_pluto.jpg'),
-		bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/wb_pluto.jpg'),
+		bumpMap	: THREE.ImageUtils.loadTexture(THREEx.Planets.baseURL+'images/plutobump1k.jpg'),
 		bumpScale: 0.5,
 	})
 	var mesh	= new THREE.Mesh(geometry, material)

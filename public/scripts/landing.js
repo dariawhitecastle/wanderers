@@ -1,5 +1,5 @@
 $('.closeLanding').click(() => {
-  $('.landing').addClass('animated zoomOutUp')
+  $('.landing').addClass('animated fadeOut')
   setTimeout(() => {
     $('.landing').remove()
   }, 2200)
