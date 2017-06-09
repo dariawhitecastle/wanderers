@@ -73,11 +73,11 @@ function init() {
   const light1 = new THREE.AmbientLight(0xffffff, .8)
   scene.add(light1)
 
-	let light	= new THREE.PointLight(0xffffff, 0.7, 0)
+	let light	= new THREE.PointLight(0xffffff, 0.6, 0)
 	light.position.set( 0, 0, 0 )
 	light.castShadow	= true
 	light.shadow.camera.near	= 0.5
-	light.shadow.camera.far	= 500
+	light.shadow.camera.far	= 1000
 	light.shadow.camera.fov	= 90
 	light.shadow.camera.left	= -1
 	light.shadow.camera.right	=  1
@@ -418,7 +418,7 @@ function onDocumentMouseDown(event) {
 	let raycaster = new THREE.Raycaster()
 	raycaster.setFromCamera(vector, camera)
 
-	let intersects = raycaster.intersectObjects([solarSys.sun, solarSys.mercury, solarSys.venus, solarSys.earth, solarSys.mars, solarSys.jupiter, solarSys.saturn, solarSys.uranus, solarSys.neptune, solarSys.pluto, solarSys.callisto, solarSys.io, solarSys.europa, solarSys.ganymede, solarSys.titan], true)
+	let intersects = raycaster.intersectObjects([solarSys.sun, solarSys.mercury, solarSys.venus, solarSys.earth, solarSys.moon, solarSys.mars, solarSys.jupiter, solarSys.saturn, solarSys.uranus, solarSys.neptune, solarSys.pluto, solarSys.callisto, solarSys.io, solarSys.europa, solarSys.ganymede, solarSys.titan], true)
 
 	if (intersects.length > 0) {
 
@@ -427,17 +427,19 @@ function onDocumentMouseDown(event) {
 		}
 
 		if (intersects[0].object.geometry.parameters.radius < 100) {
-			let zIndex = intersects[0].object.geometry.parameters.radius+((intersects[0].object.geometry.parameters.radius)*0.1)
-			let xIndex = intersects[0].object.position.x - ((intersects[0].object.geometry.parameters.radius)*1.5)
+			let xIndex = intersects[0].object.position.x / 50
+			let zIndex = intersects[0].object.geometry.parameters.radius * 5
+			solarSysControls.minDistance = intersects[0].object.geometry.parameters.radius*1.25
+			solarSysControls.maxDistance = 15000-xIndex
 		}
-		let xIndex = intersects[0].object.position.x - ((intersects[0].object.geometry.parameters.radius)*2)
+		let xIndex = intersects[0].object.position.x / 15
 		let yIndex = intersects[0].object.position.y
-		let zIndex = intersects[0].object.geometry.parameters.radius+((intersects[0].object.geometry.parameters.radius)*2)
+		let zIndex = intersects[0].object.geometry.parameters.radius * (-3)
 		// camera.position.set(xIndex,yIndex,zIndex)
-		var objectPos = intersects[0].object.getWorldPosition()
-		var cameraPos = camera.getWorldPosition()
-		var newVector = new THREE.Vector3()
-		newVector.subVectors(objectPos, cameraPos)
+		// var objectPos = intersects[0].object.getWorldPosition()
+		// var cameraPos = camera.getWorldPosition()
+		// var newVector = new THREE.Vector3()
+		// newVector.subVectors(objectPos, cameraPos)
 
 		// camera.lookAt(intersects[0].object)
 		// let target = intersects[0].object.getWorldPosition()
@@ -445,11 +447,9 @@ function onDocumentMouseDown(event) {
 		// .to(target, 2000)
 		// .easing(TWEEN.Easing.Linear.None)
 		// .onUpdate(function() {
-		// 	console.log("hello")
 		// 	camera.position.set(target)
 		// })
 		// .onComplete(function() {
-		// console.log("hello")
     // camera.position.set(target)
 		// })
 		// .start()

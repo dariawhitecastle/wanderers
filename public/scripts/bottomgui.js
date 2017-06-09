@@ -5,29 +5,28 @@ $('.solarSys').click(() => {
 
 $('.sun').click(() => {
   // $('.planetInfo').addClass('.animated fadeOutLeft')
-  var xIndex = sunGroup.position.x/15
-  var zIndex = solarSys.sun.geometry.parameters.radius * (-3)
-  camera.position.set(xIndex, 0, zIndex)
+  var zIndex = solarSys.sun.geometry.parameters.radius * (2.5)
+  camera.position.set(0, 0, zIndex)
   sunGroup.add(camera)
 })
 
 $('.mercury').click(() => {
-  var xIndex = mercuryGroup.position.x/15
-  var zIndex = solarSys.mercury.geometry.parameters.radius * (-3)
+  var xIndex = mercuryGroup.position.x/50
+  var zIndex = solarSys.mercury.geometry.parameters.radius * (-15)
   camera.position.set(xIndex, 0, zIndex)
   mercuryGroup.add(camera)
 })
 
 $('.venus').click(() => {
-  var xIndex = venusGroup.position.x/15
-  var zIndex = solarSys.venus.geometry.parameters.radius * (-3)
+  var xIndex = venusGroup.position.x/50
+  var zIndex = solarSys.venus.geometry.parameters.radius * (-10)
   camera.position.set(xIndex, 0, zIndex)
   venusGroup.add(camera)
 })
 
 $('.earth').click(() => {
-  var xIndex = earthGroup.position.x/15
-  var zIndex = solarSys.earth.geometry.parameters.radius * (-3)
+  var xIndex = earthGroup.position.x/55
+  var zIndex = solarSys.earth.geometry.parameters.radius * (-4)
   // zoomFactor = need to calculate the vector from camera to object
 
   // var center = solarSys.earth.position;
@@ -43,15 +42,15 @@ $('.earth').click(() => {
 })
 
 $('.mars').click(() => {
-  var xIndex = marsGroup.position.x/15
-  var zIndex = solarSys.mars.geometry.parameters.radius * (-3)
+  var xIndex = marsGroup.position.x/57
+  var zIndex = solarSys.mars.geometry.parameters.radius * (-2)
   camera.position.set(xIndex, 0, zIndex)
   marsGroup.add(camera)
 })
 
 $('.jupiter').click(() => {
-  var xIndex = jupiterGroup.position.x/15
-  var zIndex = solarSys.jupiter.geometry.parameters.radius * (-3)
+  var xIndex = jupiterGroup.position.x/20
+  var zIndex = solarSys.jupiter.geometry.parameters.radius * (-5)
   camera.position.set(xIndex, 0, zIndex)
   jupiterGroup.add(camera)
 })
@@ -78,7 +77,7 @@ $('.neptune').click(() => {
 })
 
 $('.pluto').click(() => {
-  var xIndex = plutoGroup.position.x/15
+  var xIndex = plutoGroup.position.x/55
   var zIndex = solarSys.pluto.geometry.parameters.radius * (-3)
   camera.position.set(xIndex, 0, zIndex)
   plutoGroup.add(camera)

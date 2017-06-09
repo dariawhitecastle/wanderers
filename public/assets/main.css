@@ -19,7 +19,7 @@ font-family: 'Rozha One', serif;*/
 
 .landingHead {
   font-weight: bold;
-  padding: 2em;
+  padding: 2em 0 2em 0;
   letter-spacing: .4em;
 }
 .planetInfo {
