@@ -175,6 +175,7 @@ function init() {
 
 	// sun
 	solarSys.sun = THREEx.Planets.createSun()
+	solarSys.sun.name = 'sun'
 
 	// add atmospheric glow
 	var geometry	= new THREE.SphereGeometry(2500, 32, 32)
@@ -209,6 +210,7 @@ function init() {
 	mercuryGroup.position.z = 600
 	mercuryGroup.add(solarSys.mercury)
 	mercuryPivot.add(mercuryGroup)
+	solarSys.mercury.name = 'mercury'
 
 	//VENUS
 	venusPivot = new THREE.Object3D()
@@ -218,6 +220,7 @@ function init() {
 	venusGroup.position.z = 800
 	venusGroup.add(solarSys.venus)
 	venusPivot.add(venusGroup)
+	solarSys.venus.name = 'venus'
 
 	//EARTH radius 3,959mi
 	earthPivot = new THREE.Object3D()
@@ -228,6 +231,7 @@ function init() {
 	earthGroup.position.z = 950
 	earthGroup.add(solarSys.earth)
 	earthPivot.add(earthGroup)
+	solarSys.earth.name = 'earth'
 
 	let cloudsPivot = new THREE.Object3D()
   solarSys.clouds = new THREE.Mesh(cloudsgeo, cloudsmat)
@@ -261,6 +265,7 @@ function init() {
 	solarSys.moon.position.x = 50
 	moonPivot.add(solarSys.moon)
 	// earthGroup.add(moonPivot)
+	solarSys.moon.name = 'luna'
 
 	// MARS
 	marsPivot = new THREE.Object3D()
@@ -272,6 +277,7 @@ function init() {
 	marsGroup.position.z = 1100
 	marsGroup.add(solarSys.mars)
 	marsPivot.add(marsGroup)
+	solarSys.mars.name = 'mars'
 
 	//JUPITER
 	jupiterPivot = new THREE.Object3D()
@@ -281,6 +287,7 @@ function init() {
 	jupiterGroup.position.z = 1300
 	jupiterGroup.add(solarSys.jupiter)
 	jupiterPivot.add(jupiterGroup)
+	solarSys.jupiter.name = 'jupiter'
 
 	//JUPITER's CALLISTO
 	solarSys.callisto = new THREE.Mesh(callistogeo, callistomat)
@@ -291,6 +298,7 @@ function init() {
 	callistoPivot.add(solarSys.callisto)
 	solarSys.callisto.castShadow = true
 	solarSys.callisto.receiveShadow = false
+	solarSys.callisto.name = 'callisto'
 
 	//JUPITER's GANYMEDE
 	solarSys.ganymede = new THREE.Mesh(ganymedegeo, ganymedemat)
@@ -301,6 +309,7 @@ function init() {
 	ganymedePivot.add(solarSys.ganymede)
 	solarSys.ganymede.castShadow = true
 	solarSys.ganymede.receiveShadow = false
+	solarSys.ganymede.name = 'ganymede'
 
 	//JUPITER's IO
 	solarSys.io = new THREE.Mesh(iogeo, iomat)
@@ -311,6 +320,7 @@ function init() {
 	ioPivot.add(solarSys.io)
 	solarSys.io.castShadow = true
 	solarSys.io.receiveShadow = false
+	solarSys.io.name = 'io'
 
 	//JUPITER's EUROPA
 	solarSys.europa = new THREE.Mesh(europageo, europamat)
@@ -321,6 +331,7 @@ function init() {
 	europaPivot.add(solarSys.europa)
 	solarSys.europa.castShadow = true
 	solarSys.europa.receiveShadow = false
+	solarSys.europa.name = 'europa'
 
 	// Saturn and rings
 	saturnPivot = new THREE.Object3D()
@@ -330,7 +341,7 @@ function init() {
 	saturnGroup.position.z = 1700
 	saturnPivot.add(saturnGroup)
 	saturnGroup.add(solarSys.saturn)
-
+	solarSys.saturn.name = 'saturn'
 
 	let saturnRingsPivot = new THREE.Object3D()
 	saturnPivot.add(saturnRingsPivot)
@@ -347,6 +358,7 @@ function init() {
 	titanPivot.add(solarSys.titan)
 	solarSys.titan.castShadow = true
 	solarSys.titan.receiveShadow = false
+	solarSys.titan.name = 'titan'
 
 	var geometry	= new THREE.SphereGeometry(11, 32, 32)
 	var material	= createAtmosphereMaterial()
@@ -376,6 +388,7 @@ function init() {
 	uranusGroup.position.z = 2000
 	uranusPivot.add(uranusGroup)
 	uranusGroup.add(solarSys.uranus)
+	solarSys.uranus.name = 'uranus'
 
 	let uranusRingsPivot = new THREE.Object3D()
 	uranusPivot.add(uranusRingsPivot)
@@ -391,6 +404,7 @@ function init() {
 	neptuneGroup.position.z = 2300
 	neptunePivot.add(neptuneGroup)
 	neptuneGroup.add(solarSys.neptune)
+	solarSys.neptune.name = 'neptune'
 
 	// Pluto
 	plutoPivot = new THREE.Object3D()
@@ -400,7 +414,8 @@ function init() {
 	plutoGroup.position.z = 2600
 	plutoPivot.add(plutoGroup)
 	plutoGroup.add(solarSys.pluto)
-
+	solarSys.pluto.name = 'pluto'
+	
 	//Starfield
 	solarSys.starfield = THREEx.Planets.createStarfield()
 
@@ -454,8 +469,7 @@ function onDocumentMouseDown(event) {
 		// })
 		// .start()
 		intersects[0].object.add(camera)
-		camera.position = newVector
-		console.log(camera.position)
+		// camera.position = newVector
 
 		solarSysControls.minDistance = intersects[0].object.geometry.parameters.radius+50
   }
