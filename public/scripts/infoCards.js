@@ -19,29 +19,16 @@ function createPlanetDataObjects(planetData) {
   return solarSys
 }
 
-$.ajax({
-  url: '/data',
-  method: 'GET'
-})
-.done( planetData => {
-  createPlanetDataObjects(planetData)
-  appendData(solarSys)
-  // $('[data-planet]').click(() => {
-  //   var planetData = solarSys[this.dataset.planet]
-  //   renderPlanetData
-  //
-  // })
-})
-
 function appendData(solarSys) {
+
   Object.keys(solarSys).forEach(key => {
     var planet = solarSys[key]
     domEvents.addEventListener(planet, 'mousedown', function(event) {
-      console.log(planet, planet.name, key);
       if (planet.name === key) {
         if($('.info')) {
           $('.info').remove()
         }
+        console.log(planet.name, key, planet.facts);
         $('.planetInfo').append(
           `<div class="info"><h5 class="planetHeader">You are currently on planet ${planet.name}</h5>
           <div class="divider"></div>
@@ -67,3 +54,12 @@ function appendData(solarSys) {
     }, false)
   })
 }
+
+$.ajax({
+  url: '/data',
+  method: 'GET'
+})
+.done( planetData => {
+  createPlanetDataObjects(planetData)
+  appendData(solarSys)
+})
