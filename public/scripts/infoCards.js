@@ -56,7 +56,7 @@ function appendData(solarSys) {
 }
 
 $.ajax({
-  url: '/data',
+  url: ' https://wanderers-backend.herokuapp.com/data',
   method: 'GET'
 })
 .done( planetData => {

@@ -17,6 +17,10 @@ font-family: 'Rozha One', serif;*/
   letter-spacing: .2em;
 }
 
+.link {
+  color: hsla(59, 98%, 76%, 0.97);
+  font-weight: bold;
+}
 .planetInfo {
   font-family: 'Cinzel', serif;
 }
