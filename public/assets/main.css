@@ -17,6 +17,14 @@ font-family: 'Rozha One', serif;*/
   letter-spacing: .2em;
 }
 
+.planetInfo {
+  font-family: 'Cinzel', serif;
+}
+.planetFact {
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  line-height: 1.2em;
+}
 .landingHead {
   font-weight: bold;
   padding: 2em 0 2em 0;

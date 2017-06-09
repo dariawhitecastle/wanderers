@@ -265,7 +265,7 @@ function init() {
 	solarSys.moon.position.x = 50
 	moonPivot.add(solarSys.moon)
 	// earthGroup.add(moonPivot)
-	solarSys.moon.name = 'luna'
+	solarSys.moon.name = 'moon'
 
 	// MARS
 	marsPivot = new THREE.Object3D()
@@ -415,7 +415,7 @@ function init() {
 	plutoPivot.add(plutoGroup)
 	plutoGroup.add(solarSys.pluto)
 	solarSys.pluto.name = 'pluto'
-	
+
 	//Starfield
 	solarSys.starfield = THREEx.Planets.createStarfield()
 
@@ -450,7 +450,7 @@ function onDocumentMouseDown(event) {
 		let xIndex = intersects[0].object.position.x / 15
 		let yIndex = intersects[0].object.position.y
 		let zIndex = intersects[0].object.geometry.parameters.radius * (-3)
-		// camera.position.set(xIndex,yIndex,zIndex)
+		camera.position.set(xIndex,yIndex,zIndex)
 		// var objectPos = intersects[0].object.getWorldPosition()
 		// var cameraPos = camera.getWorldPosition()
 		// var newVector = new THREE.Vector3()

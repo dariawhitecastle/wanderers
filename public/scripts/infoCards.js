@@ -37,6 +37,7 @@ function appendData(solarSys) {
   Object.keys(solarSys).forEach(key => {
     var planet = solarSys[key]
     domEvents.addEventListener(planet, 'mousedown', function(event) {
+      console.log(planet, planet.name, key);
       if (planet.name === key) {
         if($('.info')) {
           $('.info').remove()
