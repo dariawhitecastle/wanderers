@@ -22,7 +22,7 @@ function createPlanetDataObjects(planetData) {
 function appendData(solarSys) {
 
   Object.keys(solarSys).forEach(key => {
-    var planet = solarSys[key]
+    let planet = solarSys[key]
     domEvents.addEventListener(planet, 'mousedown', function(event) {
       if (planet.name === key) {
         if($('.info')) {
@@ -47,9 +47,9 @@ function appendData(solarSys) {
           event.stopPropagation()
           $('.planetInfo').addClass('animated fadeOutLeft')
         })
+        $('.planetInfo').removeClass('animated fadeOutLeft')
+        $('.planetInfo').addClass('animated fadeInLeft')
       }
-      $('.planetInfo').removeClass('animated fadeOutLeft')
-      $('.planetInfo').addClass('animated fadeInLeft')
     }, false)
   })
 }
