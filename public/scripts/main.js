@@ -39,12 +39,14 @@ animate()
 
 function init() {
 	container = document.getElementById( 'mainCanvas' )
-	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000 )
+	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000 ) //fov, aspect, near, far
 	camera.position.set( 0, 0, 13000 )
 	scene = new THREE.Scene()
 	projector = new THREE.Projector()
+	effect = new THREE.StereoEffect(renderer)
 	document.addEventListener('mousedown', onDocumentMouseDown, false)
 	window.addEventListener( 'resize', onWindowResize, false )
+	window.addEventListener('deviceorientation', setOrientationControls, true)
 
 	// GROUPS
 	sunGroup = new THREE.Group()
@@ -424,6 +426,7 @@ function init() {
 }
 
 let solarSysControls =  new THREE.OrbitControls(camera, renderer.domElement)
+
 function onDocumentMouseDown(event) {
 
 	if (event.target !== renderer.domElement) {
@@ -468,11 +471,22 @@ function onDocumentMouseDown(event) {
     // camera.position.set(target)
 		// })
 		// .start()
-		intersects[0].object.add(camera)
 		// camera.position = newVector
-
+		intersects[0].object.add(camera)
 		solarSysControls.minDistance = intersects[0].object.geometry.parameters.radius+50
   }
+}
+
+function setOrientationControls(e) {
+
+	if (!e.alpha) {
+		return
+	}
+	solarSysControls = new THREE.DeviceOrientationControls(camera, true)
+	controls.connect()
+	controls.update()
+	element.addEventListener('click', fullscreen, false)
+	window.removeEventListener('deviceorientation', setOrientationControls, true)
 }
 
 function animate() {

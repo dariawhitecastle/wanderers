@@ -28,7 +28,6 @@ function appendData(solarSys) {
         if($('.info')) {
           $('.info').remove()
         }
-        console.log(planet.name, key, planet.facts);
         $('.planetInfo').append(
           `<div class="info"><h5 class="planetHeader">You are currently on planet ${planet.name}</h5>
           <div class="divider"></div>
