@@ -1,5 +1,5 @@
 let container
-let camera, scene, projector
+let camera, scene, projector, manager, effect, mobileMode
 let solarSys = {
 	sun: {},
 	mercury: {},
@@ -44,10 +44,15 @@ function init() {
 	scene = new THREE.Scene()
 	projector = new THREE.Projector()
 	effect = new THREE.StereoEffect(renderer)
+	effect.eyeSeparation = 10
+	effect.setSize( window.innerWidth, window.innerHeight )
+ 	manager = new WebVRManager(renderer, effect)
 	document.addEventListener('mousedown', onDocumentMouseDown, false)
 	window.addEventListener( 'resize', onWindowResize, false )
-	window.addEventListener('deviceorientation', setOrientationControls, true)
+	// window.addEventListener('deviceorientation', setOrientationControls, true)
+	initializeControls(camera, renderer.domElement)
 
+	mobileMode = checkForMobile()
 	// GROUPS
 	sunGroup = new THREE.Group()
 	scene.add(sunGroup)
@@ -425,7 +430,7 @@ function init() {
 
 }
 
-let solarSysControls =  new THREE.OrbitControls(camera, renderer.domElement)
+// let solarSysControls =  new THREE.OrbitControls(camera, renderer.domElement)
 
 function onDocumentMouseDown(event) {
 
@@ -477,16 +482,13 @@ function onDocumentMouseDown(event) {
   }
 }
 
-function setOrientationControls(e) {
-
-	if (!e.alpha) {
-		return
+function checkForMobile() {
+	try {
+		document.createEvent("TouchEvent");
+		return true;
+	} catch(error) {
+		return false;
 	}
-	solarSysControls = new THREE.DeviceOrientationControls(camera, true)
-	controls.connect()
-	controls.update()
-	element.addEventListener('click', fullscreen, false)
-	window.removeEventListener('deviceorientation', setOrientationControls, true)
 }
 
 function animate() {
@@ -510,7 +512,6 @@ function render() {
 
 	camera.lookAt( scene.position )
 	sunGroup.rotation.y -= 1/24.47*0.001*(-1)
-	// solarSys.starfield.rotation.y -= 0.0001
 	mercuryGroup.rotation.y -= 1/58*0.001*(-1)
 	mercuryPivot.rotation.y -=365/88*0.001*(-1)
 
@@ -541,6 +542,14 @@ function render() {
 	neptunePivot.rotation.y -=365/60200*0.001*(-1)
 	plutoGroup.rotation.y -=1/6*0.001*(-1)
 	plutoPivot.rotation.y -=365/90155*0.001*(-1)
-	renderer.render( scene, camera )
+
+	if(!mobileMode) {
+		renderer.render( scene, camera )
+	} else {
+		// Update the scene through the manager.
+		manager.render(scene, camera)
+		document.body.webkitRequestFullscreen() // attach to a click handler
+		window.scrollTo(0, 1)
+	}
 
 }
