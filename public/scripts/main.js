@@ -127,16 +127,16 @@ function init() {
 	// earth
   let earthgeo = new THREE.SphereGeometry( 25, 40, 40 )
   let earthmat = new THREE.MeshPhongMaterial( {
-    map: textureLoader.load('../assets/earth_atmos.jpg'),
-    specularMap: textureLoader.load('../assets/specularmap.jpg'),
-    bumpMap: textureLoader.load('../assets/earth_normal_2048.jpg'),
+    map: textureLoader.load('../assets/earth_atmos-min.jpg'),
+    specularMap: textureLoader.load('../assets/specularmap-min.jpg'),
+    bumpMap: textureLoader.load('../assets/earth_normal_2048-min.jpg'),
     bumpScale: 10
   })
 
 	// clouds
   let cloudsgeo = new THREE.SphereGeometry( 25.5, 40, 40 )
   let cloudsmat = new THREE.MeshPhongMaterial( {
-    map: textureLoader.load('../assets/earth_clouds_2048.png'),
+    map: textureLoader.load('../assets/earth_clouds_2048-min.png'),
     opacity: 0.8,
     transparent: true,
     depthWrite: false
@@ -146,32 +146,32 @@ function init() {
 	// callisto radius 1,498mi, 1,170,000mi from Jupiter
 	let callistogeo = new THREE.SphereGeometry(9.62, 32, 32)
 	let callistomat = new THREE.MeshPhongMaterial({
-		map: textureLoader.load('../assets/callisto.jpg'),
-		bumpMap: textureLoader.load('../assets/CallistoNormal.png'),
+		map: textureLoader.load('../assets/callisto-min.jpg'),
+		bumpMap: textureLoader.load('../assets/CallistoNormal-min.png'),
 		bumpScale: 5
 	})
 
 	//ganymede radius 1,635mi, 665,000mi from Jupiter
 	let ganymedegeo = new THREE.SphereGeometry(9.62, 32, 32)
 	let ganymedemat = new THREE.MeshPhongMaterial({
-		map: textureLoader.load('../assets/ganymede.jpg'),
-		bumpMap: textureLoader.load('../assets/ganymede.jpg'),
+		map: textureLoader.load('../assets/ganymede-min.jpg'),
+		bumpMap: textureLoader.load('../assets/ganymede-min.jpg'),
 		bumpScale: 7
 	})
 
 	//europa radius 800mi, 414,000 miles from Jupiter
 	let europageo = new THREE.SphereGeometry(9.62, 32, 32)
 	let europamat = new THREE.MeshPhongMaterial({
-		map: textureLoader.load('../assets/europa1_out.jpg'),
-		bumpMap: textureLoader.load('../assets/europa1_out.jpg'),
+		map: textureLoader.load('../assets/europa1_out-min.jpg'),
+		bumpMap: textureLoader.load('../assets/europa1_out-min.jpg'),
 		bumpScale: 6
 	})
 
 	//io radius 1,131mi, 262,000 mi from Jupiter
 	let iogeo = new THREE.SphereGeometry(9.62, 32, 32)
 	let iomat = new THREE.MeshPhongMaterial({
-		map: textureLoader.load('../assets/io.png'),
-		bumpMap: textureLoader.load('../assets/io.png'),
+		map: textureLoader.load('../assets/io-min.png'),
+		bumpMap: textureLoader.load('../assets/io-min.png'),
 		bumpScale: 6
 	})
 
