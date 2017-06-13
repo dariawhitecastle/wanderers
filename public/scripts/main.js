@@ -1,5 +1,5 @@
 let container
-let camera, scene, projector, manager, effect, mobileMode
+let camera, scene, projector, manager, effect, clock
 let solarSys = {
 	sun: {},
 	mercury: {},
@@ -38,21 +38,25 @@ init()
 animate()
 
 function init() {
+
 	container = document.getElementById( 'mainCanvas' )
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100000 ) //fov, aspect, near, far
 	camera.position.set( 0, 0, 13000 )
 	scene = new THREE.Scene()
-	projector = new THREE.Projector()
+	// projector = new THREE.Projector()
 	effect = new THREE.StereoEffect(renderer)
 	effect.eyeSeparation = 10
 	effect.setSize( window.innerWidth, window.innerHeight )
  	manager = new WebVRManager(renderer, effect)
+	clock = new THREE.Clock()
 	document.addEventListener('mousedown', onDocumentMouseDown, false)
 	window.addEventListener( 'resize', onWindowResize, false )
 	// window.addEventListener('deviceorientation', setOrientationControls, true)
 	initializeControls(camera, renderer.domElement)
 
-	mobileMode = checkForMobile()
+	// mobileMode = checkForMobile()
+
+
 	// GROUPS
 	sunGroup = new THREE.Group()
 	scene.add(sunGroup)
@@ -484,16 +488,18 @@ function onDocumentMouseDown(event) {
 
 function checkForMobile() {
 	try {
-		document.createEvent("TouchEvent");
-		return true;
+		document.createEvent("TouchEvent")
+		return true
 	} catch(error) {
-		return false;
+		return false
 	}
 }
 
 function animate() {
+
 	requestAnimationFrame(animate)
 	render()
+
 }
 
 function onWindowResize(event) {
@@ -547,9 +553,14 @@ function render() {
 		renderer.render( scene, camera )
 	} else {
 		// Update the scene through the manager.
-		manager.render(scene, camera)
-		document.body.webkitRequestFullscreen() // attach to a click handler
+		manager.render( scene, camera )
+		// document.body.webkitRequestFullscreen() // attach to a click handler
 		window.scrollTo(0, 1)
+		let delta = clock.getDelta()
+	  solarSysControls.update(delta)
+		$('.landing').remove()
 	}
+
+
 
 }

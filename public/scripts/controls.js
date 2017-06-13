@@ -1,18 +1,27 @@
 let solarSysControls
+let mobileMode = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
 function initializeControls(camera, element) {
 
-  solarSysControls =  new THREE.OrbitControls(camera, renderer.domElement)
-  // solarSysControls = new THREE.FlyControls(camera, element)
-  solarSysControls.autoForward = true
-  solarSysControls.dragToLook = true
-  solarSysControls.movementSpeed = 5
-  solarSysControls.rollSpeed = 1
+  if (mobileMode) {
+    // solarSysControls = new THREE.FlyControls(camera, element)
+    // solarSysControls.autoForward = true
+    // solarSysControls.dragToLook = true
+    // solarSysControls.movementSpeed = 10
+    // solarSysControls.rollSpeed = 10
+    window.addEventListener('deviceorientation', setOrientationControls, true)
+    console.log("is Mobile!");
+	} else {
+    // WASD-style movement controls
+    solarSysControls = new THREE.OrbitControls(camera, element)
+    window.addEventListener('deviceorientation', setOrientationControls, true)
+    console.log("is not Mobile!");
+  }
 
-  window.addEventListener('deviceorientation', setOrientationControls, true)
 }
 
 function setOrientationControls(e) {
-
+  console.log('test');
 	if (!e.alpha) {
 		return
 	}

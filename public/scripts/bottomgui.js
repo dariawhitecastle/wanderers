@@ -1,8 +1,6 @@
 function checkClass() {
-  if (!($('.planetInfo').hasClass('animated fadeOutLeft'))) {
-    return
-  } else {
-    $('.planetInfo').addClass('animated fadeOutLeft')
+  if ($('.planetInfo').hasClass('fadeInLeft')) {
+    $('.planetInfo').addClass('fadeOutLeft')
   }
 }
 
