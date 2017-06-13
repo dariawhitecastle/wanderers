@@ -1,15 +1,15 @@
 let solarSysControls
-let mobileMode = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+let mobileMode = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Nexus/i.test(navigator.userAgent);
 
 function initializeControls(camera, element) {
 
   if (mobileMode) {
-    solarSysControls = new THREE.DeviceOrientationControls( camera, element )
-    // solarSysControls = new THREE.FlyControls(camera, element)
-    // solarSysControls.autoForward = true
-    // solarSysControls.dragToLook = true
-    // solarSysControls.movementSpeed = 10
-    // solarSysControls.rollSpeed = 10
+    // solarSysControls = new THREE.DeviceOrientationControls( camera, element )
+    solarSysControls = new THREE.FlyControls(camera, element)
+    solarSysControls.autoForward = true
+    solarSysControls.dragToLook = true
+    solarSysControls.movementSpeed = 10
+    solarSysControls.rollSpeed = 10
     // window.addEventListener('deviceorientation', setOrientationControls, true)
     console.log("is Mobile!");
 	} else {
