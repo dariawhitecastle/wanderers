@@ -549,18 +549,17 @@ function render() {
 	plutoGroup.rotation.y -=1/6*0.001*(-1)
 	plutoPivot.rotation.y -=365/90155*0.001*(-1)
 
+	let delta = clock.getDelta()
+
 	if(!mobileMode) {
 		renderer.render( scene, camera )
 	} else {
 		// Update the scene through the manager.
+		solarSysControls.update(delta)
 		manager.render( scene, camera )
 		// document.body.webkitRequestFullscreen() // attach to a click handler
-		window.scrollTo(0, 1)
-		let delta = clock.getDelta()
-	  solarSysControls.update(delta)
+		// window.scrollTo(0, 1)
 		$('.landing').remove()
 	}
-
-
 
 }
